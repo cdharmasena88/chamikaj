@@ -7,13 +7,13 @@ dotenv.config();
 const InsertDesc = () => {
 
     const OpenAI = require('openai-api');
-    const OPENAI_API_KEY = '';
+    const OPENAI_API_KEY = 'sk-LB7Qm2qR3zcScsqMsQ70pXkEt34U0s6TCtZFLYqF';
     //const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
     const openai = new OpenAI(OPENAI_API_KEY);
     console.log(`process.env`, process.env.REACT_APP_OPENAI_API_KEY);
 
 
-    const [data, setData] = useState(['hdfjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjshdjhsjdeeeeeeeeeesssserstrdtdytrutfyffuyygfytyguguyguguguigiugiugiugugugiuggkgughughuguguugukjhkjkkjiukukuklkil;il', 'dghewyudgeiuwygrdeiwugrdfeuigrduiegduigedghewuidgewudgewuigduiewgduiyewdgh']);
+    const [data, setData] = useState(['', 'dghewyudgeiuwygrdeiwugrdfeuigrduiegduigedghewuidgewudgewuigduiewgduiyewdgh']);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [keywords, setKeywords] = useState('');
