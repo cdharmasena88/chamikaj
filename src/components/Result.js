@@ -1,4 +1,4 @@
-import "./Result.css";
+import "./RunApp.css";
 
 const Result = props => {
   return (

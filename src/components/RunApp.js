@@ -1,25 +1,20 @@
 import { useState } from "react";
 import Result from "./Result";
 import dotenv from "dotenv";
+import "./RunApp.css";
 
-dotenv.config();
-
-const InsertDesc = () => {
+const RunApp = () => {
   const OpenAI = require("openai-api");
   const OPENAI_API_KEY = "";
-  //const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-  const openai = new OpenAI(OPENAI_API_KEY);
-  console.log(`process.env`, process.env.REACT_APP_OPENAI_API_KEY);
 
-  const [data, setData] = useState([
-    "",
-    "dghewyudgeiuwygrdeiwugrdfeuigrduiegduigedghewuidgewudgewuigduiewgduiyewdgh"
-  ]);
+  const openai = new OpenAI(OPENAI_API_KEY);
+
+  const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [keywords, setKeywords] = useState("");
 
-  let maxTokens = [60, 60, 80];
+  let maxTokens = [5, 5, 5];
   let tempList = [0.6, 0.7, 0.8];
 
   const stringBuilder = str => {
@@ -71,7 +66,6 @@ const InsertDesc = () => {
               ...arr,
               stringBuilder(gptResponse.data.choices[0].text)
             ]);
-            //console.log("data", data)
           } catch (err) {
             console.log(err.message);
           }
@@ -83,40 +77,54 @@ const InsertDesc = () => {
   };
 
   return (
-    <div className="container">
-      <div className="create">
-        <h2>Generate Product Descriptions</h2>
+    <div className="wrapper">
+      <div className="box0">
+        <div className="tools">
+          <h4> Product Descriptions</h4>
+        </div>
+      </div>
+      <div className="box1">
         <form onSubmit={handleSubmit}>
-          <label>Product Name: </label>
-          <input
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          ></input>
+          <div className="form-div">
+            <div>
+              <label>Enter Product Name:</label>
+              <input
+                type="text"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              ></input>
+            </div>
 
-          <label>Product Description: </label>
-          <textarea
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-          ></textarea>
-
-          <label>Keywords: </label>
-          <input
-            type="text"
-            value={keywords}
-            onChange={e => setKeywords(e.target.value)}
-          ></input>
-          <button>Submit</button>
-          <button>Clear</button>
+            <div>
+              <label>Enter Product Description: </label>
+              <textarea
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+              ></textarea>
+            </div>
+            <div>
+              <label>Keywords: </label>
+              <input
+                type="text"
+                value={keywords}
+                onChange={e => setKeywords(e.target.value)}
+              ></input>
+            </div>
+            <button>Click to Generate</button>
+          </div>
         </form>
       </div>
-      <div className="create">
-        {data.map(item => (
-          <Result data={item} />
-        ))}
+      <div className="box2">
+        <div className="scroll">
+          <div className="results">
+            {data.map(item => (
+              <Result data={item} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default InsertDesc;
+export default RunApp;
