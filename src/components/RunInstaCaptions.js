@@ -3,19 +3,23 @@ import Result from "./Result";
 import "./RunApp.css";
 import { Link } from "react-router-dom";
 
-const RunApp = () => {
+const RunInstaCaptions = () => {
   const OpenAI = require("openai-api");
   const OPENAI_API_KEY = "";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [keywords, setKeywords] = useState("");
 
-  let maxTokens = [60, 60, 60];
+  let maxTokens = [10, 10, 10];
   let tempList = [0.6, 0.7, 0.8];
+  let engine = [
+    "davinci-instruct-beta",
+    "davinci-instruct-beta",
+    "curie-instruct-beta"
+  ];
 
   const stringBuilder = str => {
     var newStr = str.trim().replace(/(\r\n|\n|\r)/gm, "");
@@ -26,22 +30,15 @@ const RunApp = () => {
     e.preventDefault();
 
     var prompt = "";
-    if (name !== "") {
+    if (description !== "") {
       prompt =
-        "please write a product description about " +
-        name.trim() +
+        "please write a instagram caption about " +
+        description.trim() +
         "," +
         stringBuilder(description) +
         "." +
         keywords;
-    } else {
-      prompt =
-        "please write a product description about " +
-        stringBuilder(description) +
-        "." +
-        keywords;
     }
-
     console.log(prompt);
 
     if (description !== "" || keywords !== "") {
@@ -49,7 +46,7 @@ const RunApp = () => {
         (async () => {
           try {
             const gptResponse = await openai.complete({
-              engine: "davinci-instruct-beta",
+              engine: engine[step],
               prompt: prompt,
               maxTokens: maxTokens[step],
               temperature: tempList[step],
@@ -93,15 +90,7 @@ const RunApp = () => {
       <div className="box1">
         <form onSubmit={handleSubmit}>
           <div className="form-div">
-            <h3 className="service-name"> Product Description</h3>
-            <div>
-              <label>Enter Product Name:</label>
-              <input
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-              ></input>
-            </div>
+            <h3 className="service-name"> Instagram Captions</h3>
 
             <div>
               <label>Enter Product Description: </label>
@@ -135,4 +124,4 @@ const RunApp = () => {
   );
 };
 
-export default RunApp;
+export default RunInstaCaptions;
