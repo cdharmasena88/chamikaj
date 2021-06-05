@@ -9,7 +9,7 @@
 @media (min-width: 768px) {
   .wrapper {
     display: flex;
-    column-gap: 10px;
+
     justify-content: center;
     padding-bottom: 5px;
   }
@@ -24,6 +24,15 @@
 /* .wrapper > div:nth-child(odd) {
   background: #ddd;
 } */
+
+a {
+  color: green;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
 
 .h4-class {
   padding: 10px 10px;
@@ -71,6 +80,19 @@
 .box0 {
   background: #eee;
   padding: 15px;
+  position: relative;
+}
+
+.box0 .examples {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.examples {
+  margin: 20px;
+  font-size: 16px;
+  font-style: normal;
 }
 
 .box1 {
@@ -80,8 +102,6 @@
 
 .box2 {
   flex: 1;
-  max-height: 80%;
-
   background: #f4f6fb;
   overflow-y: auto;
 }

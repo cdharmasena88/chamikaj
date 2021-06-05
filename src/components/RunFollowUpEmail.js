@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunFollowUpEmail = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "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";
+  const OPENAI_API_KEY = "";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -14,7 +14,7 @@ const RunFollowUpEmail = () => {
   const [isPending, setIspending] = useState(false);
   const [isInputEmpty, setIsInputEmpty] = useState(false);
 
-  let maxTokens = [30, 30, 30];
+  let maxTokens = [120, 120, 120];
   let tempList = [1, 1, 1];
   let engine = [
     "curie-instruct-beta",
@@ -119,6 +119,7 @@ const RunFollowUpEmail = () => {
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
+                  placeholder="e.g helping you with copywriting"
                 ></textarea>
               </div>
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const BulletToPara = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "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";
+  const OPENAI_API_KEY = "";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -114,6 +114,7 @@ const BulletToPara = () => {
                   type="text"
                   value={keywords}
                   onChange={e => setKeywords(e.target.value)}
+                  placeholder="e.g How to use AI for your business"
                 ></input>
               </div>
 
@@ -122,6 +123,7 @@ const BulletToPara = () => {
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
+                  placeholder="e.g solution for the writers block"
                 ></textarea>
               </div>
 

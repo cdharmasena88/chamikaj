@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunInstaCaptions = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "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";
+  const OPENAI_API_KEY = "";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -49,7 +49,7 @@ const RunInstaCaptions = () => {
 
     if (description !== "") {
       console.log("call API");
-      for (let step = 0; step < 3; step++) {
+      for (let step = 0; step < 5; step++) {
         (async () => {
           try {
             const gptResponse = await openai.complete({
@@ -117,12 +117,11 @@ const RunInstaCaptions = () => {
               <h3 className="service-name"> Instagram Captions</h3>
 
               <div>
-                <label className="input-label">
-                  Enter Product Description:{" "}
-                </label>
+                <label className="input-label">What is your post about: </label>
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
+                  placeholder="e.g a beautiful day in Hawaii"
                 ></textarea>
               </div>
               <div>
@@ -131,6 +130,7 @@ const RunInstaCaptions = () => {
                   type="text"
                   value={keywords}
                   onChange={e => setKeywords(e.target.value)}
+                  placeholder="e.g beach, rainbow, vacation"
                 ></input>
               </div>
               {isPending ? (

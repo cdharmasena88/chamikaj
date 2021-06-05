@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunEmailSubjectLines = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "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";
+  const OPENAI_API_KEY = "";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -124,6 +124,7 @@ const RunEmailSubjectLines = () => {
                   type="text"
                   value={keywords}
                   onChange={e => setKeywords(e.target.value)}
+                  placeholder="copyHero"
                 ></input>
               </div>
 
@@ -134,6 +135,7 @@ const RunEmailSubjectLines = () => {
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
+                  placeholder="e.g helping you with copywriting"
                 ></textarea>
               </div>
 
