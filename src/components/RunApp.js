@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunApp = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "";
+  const OPENAI_API_KEY = "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";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -13,6 +13,8 @@ const RunApp = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [keywords, setKeywords] = useState("");
+  const [isLoading, setIspending] = useState(false);
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
 
   let maxTokens = [60, 60, 60];
   let tempList = [0.6, 0.7, 0.8];
@@ -24,6 +26,8 @@ const RunApp = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setIspending(true);
+    setData([]);
 
     var prompt = "";
     if (name !== "") {
@@ -40,6 +44,11 @@ const RunApp = () => {
         stringBuilder(description) +
         "." +
         keywords;
+    }
+
+    if (description === "" || keywords === "") {
+      setIsInputEmpty(true);
+      setIspending(false);
     }
 
     console.log(prompt);
@@ -66,8 +75,11 @@ const RunApp = () => {
               ...arr,
               stringBuilder(gptResponse.data.choices[0].text)
             ]);
+            setIspending(false);
+            setIsInputEmpty(false);
           } catch (err) {
             console.log(err.message);
+            setIspending(false);
           }
         })();
       }
@@ -82,11 +94,24 @@ const RunApp = () => {
         <div className="tools">
           <Link to="/services" className="h4-class">
             {" "}
-            Product Descriptions
+            <p>Product Descriptions</p>
           </Link>
           <Link to="/instagramCaptions" className="h4-class">
             {" "}
-            Instagram Captions
+            <p>Instagram Captions</p>
+          </Link>
+          <hr class="seperate-tools"></hr>
+          <h3 className="tool-group">Write Emails</h3>
+          <Link to="/emailSubjectLines" className="h4-class">
+            <p>Catchy Email Subject Lines</p>
+          </Link>
+          <Link to="/followupEmail" className="h4-class">
+            <p>Write a Follow Up Email</p>
+          </Link>
+          <hr class="seperate-tools"></hr>
+          <h3 className="tool-group">Blogs</h3>
+          <Link to="/bulletPointToParagraph" className="h4-class">
+            <p>Bullet point to Paragraph</p>
           </Link>
         </div>
       </div>
@@ -118,17 +143,21 @@ const RunApp = () => {
                 onChange={e => setKeywords(e.target.value)}
               ></input>
             </div>
-            <button>Click to Generate</button>
+            {isLoading ? (
+              <button disabled>Generating Captions</button>
+            ) : (
+              <button>Click to Generate</button>
+            )}
           </div>
         </form>
       </div>
       <div className="box2">
+        {isInputEmpty && <div className="empty-input">Your input in Empty</div>}
+        {isLoading && <div className="loading">Loading....</div>}
         <div className="scroll">
-          <div className="results">
-            {data.map(item => (
-              <Result data={item} />
-            ))}
-          </div>
+          {data.map(item => (
+            <Result data={item} />
+          ))}
         </div>
       </div>
     </div>

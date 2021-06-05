@@ -3,7 +3,7 @@ import Result from "./Result";
 import "./RunApp.css";
 import { Link } from "react-router-dom";
 
-const RunInstaCaptions = () => {
+const RunFollowUpEmail = () => {
   const OpenAI = require("openai-api");
   const OPENAI_API_KEY = "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";
 
@@ -11,15 +11,14 @@ const RunInstaCaptions = () => {
 
   const [data, setData] = useState([]);
   const [description, setDescription] = useState("");
-  const [keywords, setKeywords] = useState("");
   const [isPending, setIspending] = useState(false);
   const [isInputEmpty, setIsInputEmpty] = useState(false);
 
   let maxTokens = [30, 30, 30];
-  let tempList = [0.6, 0.7, 0.8];
+  let tempList = [1, 1, 1];
   let engine = [
-    "davinci-instruct-beta",
-    "davinci-instruct-beta",
+    "curie-instruct-beta",
+    "curie-instruct-beta",
     "curie-instruct-beta"
   ];
 
@@ -36,11 +35,10 @@ const RunInstaCaptions = () => {
     var prompt = "";
     if (description !== "") {
       prompt =
-        "please write a instagram caption about " +
+        "write a followup email about " +
         "," +
         stringBuilder(description) +
-        "." +
-        keywords;
+        ".";
     } else {
       setIsInputEmpty(true);
       setIspending(false);
@@ -49,7 +47,7 @@ const RunInstaCaptions = () => {
 
     if (description !== "") {
       console.log("call API");
-      for (let step = 0; step < 3; step++) {
+      for (let step = 0; step < 2; step++) {
         (async () => {
           try {
             const gptResponse = await openai.complete({
@@ -57,9 +55,9 @@ const RunInstaCaptions = () => {
               prompt: prompt,
               maxTokens: maxTokens[step],
               temperature: tempList[step],
-              topP: 1,
+              topP: 0.6,
               presencePenalty: 0,
-              frequencyPenalty: 0,
+              frequencyPenalty: 0.24,
               bestOf: 1,
               n: 1,
               stream: false,
@@ -101,7 +99,7 @@ const RunInstaCaptions = () => {
             <p>Catchy Email Subject Lines</p>
           </Link>
           <Link to="/followupEmail" className="h4-class">
-            <p>Write a Follow Up Email</p>
+            <p>Write a Follow up Email</p>
           </Link>
           <hr class="seperate-tools"></hr>
           <h3 className="tool-group">Blogs</h3>
@@ -114,25 +112,16 @@ const RunInstaCaptions = () => {
         <div className="form">
           <form onSubmit={handleSubmit}>
             <div className="form-div">
-              <h3 className="service-name"> Instagram Captions</h3>
+              <h3 className="service-name"> Write a follow up Email </h3>
 
               <div>
-                <label className="input-label">
-                  Enter Product Description:{" "}
-                </label>
+                <label className="input-label">What is the email about: </label>
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                 ></textarea>
               </div>
-              <div>
-                <label className="input-label">Keywords: </label>
-                <input
-                  type="text"
-                  value={keywords}
-                  onChange={e => setKeywords(e.target.value)}
-                ></input>
-              </div>
+
               {isPending ? (
                 <button disabled>Generating Captions</button>
               ) : (
@@ -160,4 +149,4 @@ const RunInstaCaptions = () => {
   );
 };
 
-export default RunInstaCaptions;
+export default RunFollowUpEmail;
