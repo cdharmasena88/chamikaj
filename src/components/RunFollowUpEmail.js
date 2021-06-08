@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunFollowUpEmail = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "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";
+  const OPENAI_API_KEY = "";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
