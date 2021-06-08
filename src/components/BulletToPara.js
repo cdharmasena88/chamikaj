@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const BulletToPara = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "";
+  const OPENAI_API_KEY = "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";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -100,6 +100,14 @@ const BulletToPara = () => {
           <Link to="/bulletPointToParagraph" className="h4-class">
             <p>Bullet point to Paragraph</p>
           </Link>
+          <div className="examples">
+            <a
+              href="https://www.notion.so/Get-Better-Results-437010b249e94bffb36bbac2ce8922af"
+              target="_blank"
+            >
+              Tips for Better Results
+            </a>
+          </div>
         </div>
       </div>
       <div className="box1">

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunApp = () => {
   const OpenAI = require("openai-api");
-  const OPENAI_API_KEY = "";
+  const OPENAI_API_KEY = "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";
 
   const openai = new OpenAI(OPENAI_API_KEY);
 
@@ -16,7 +16,7 @@ const RunApp = () => {
   const [isLoading, setIspending] = useState(false);
   const [isInputEmpty, setIsInputEmpty] = useState(false);
 
-  let maxTokens = [80, 80, 80];
+  let maxTokens = [60, 60, 60];
   let tempList = [0.6, 0.7, 0.8];
 
   const stringBuilder = str => {
@@ -46,7 +46,7 @@ const RunApp = () => {
         keywords;
     }
 
-    if (description === "" || keywords === "") {
+    if (description === "" && keywords === "") {
       setIsInputEmpty(true);
       setIspending(false);
     }
